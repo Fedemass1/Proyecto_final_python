@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block cambio %}
+
+    <div>
+
+        <form action="/app/buscar_cliente" method="GET">
+
+            {{ form.as_p }}
+
+            <input type="submit" value="Buscar">
+        </form>
+    </div>
+
+    {% for cliente in clientes %}
+        <h2> {{ cliente.nombre }} </h2>
+        <p class="lead mb-0">
+            Numero de documento: {{ cliente.dni }}
+        <p class="lead mb-0">
+            Correo electrónico: {{ cliente.email }}
+        </p>
+    {% endfor %}
+
+
+
+    {% for producto in productos %}
+        <h2> {{ producto.nombre_producto }} </h2>
+        <p class="lead mb-0">
+            ID producto: {{ producto.id_producto }}
+        <p class="lead mb-0">
+            Precio de venta: {{ producto.precio_venta }}
+        </p>
+    {% endfor %}
+
+    <hr>
+
+
+{% endblock %}

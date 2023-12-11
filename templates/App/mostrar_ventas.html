@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block cambio %}
+
+    {% for venta in ventas %}
+        <h2> {{ venta.nombre_producto }} </h2>
+        <p class="lead mb-0">
+            DNI cliente: {{ venta.dni }}
+        <p class="lead mb-0">
+            Cantidad vendida: {{ venta.cantidad_vendida }}
+        </p>
+    {% endfor %}
+
+    <hr>
+
+
+{% endblock %}

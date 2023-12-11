@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block cambio %}
+
+    {% for producto in productos %}
+        <h2> {{ producto.titulo }} </h2>
+        <p class="lead mb-0">
+            ID producto: {{ producto.id_producto }}
+        <p class="lead mb-0">
+            Precio de venta: {{ producto.precio_venta }}
+        </p>
+
+        <a href="/app/producto/{{ producto.id }}">Detalle</a>
+        
+        <p>
+        <a href="{% url 'ProductoEditar' producto.id %}">Editar</a>
+        </p>
+        
+          <p>
+        <a href="{% url 'ProductoEliminar' producto.id %}">Eliminar</a>
+        </p>
+        
+    {% endfor %}
+
+
+    <hr>
+
+
+{% endblock %}
