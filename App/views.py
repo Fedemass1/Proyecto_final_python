@@ -5,7 +5,7 @@ from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
 
 from App.models import Cliente, Producto, Venta, Comentarios
 from App.forms import (ClienteForm, VentaForm,
-                       BuscarClienteForm, ComentarioForm)
+                       BuscarClienteForm, ComentarioForm, ProductoForm, BuscarProductoForm)
 
 
 def show_html(request):
@@ -49,8 +49,9 @@ def agregar_cliente_form(request):
 class AgregarProducto(LoginRequiredMixin,CreateView):
     template_name = "App/agregar.html"
     model = Producto
+    form_class = ProductoForm
     success_url = "/app/productos"
-    fields = "__all__"
+
 
 
 @login_required
@@ -58,6 +59,7 @@ def mostrar_productos(request):
     productos = Producto.objects.all()
     contexto = {
         "productos": productos,
+        "form": BuscarProductoForm,
     }
     return render(request, "App/mostrar_productos.html", contexto)
 
@@ -65,17 +67,6 @@ class DetalleProducto(LoginRequiredMixin,DetailView):
     model = Producto
     template_name = "App/detalle_producto.html"
 
-def comentario(request):
-    formulario = ComentarioForm(request.POST)
-    if formulario.is_valid():
-        informacion = formulario.cleaned_data
-        producto = Producto.objects.get(id=informacion["producto"])
-        comentario_crear = Comentarios(usuario=request.user, producto=producto, comentario=informacion["comentario"])
-        comentario_crear.save()
-
-        return redirect("/app/productos")
-
-    return render(request, "App/detalle_producto.html", {"formulario": formulario})
 
 @login_required
 def agregar_venta_form(request):
@@ -119,12 +110,23 @@ def buscar_cliente(request):
     return render(request, "App/mostrar_clientes.html", contexto)
 
 
+def buscar_producto(request):
+    titulo = request.GET["titulo"]
+    productos = Producto.objects.filter(titulo__icontains=titulo)
+
+    contexto = {
+        "productos": productos,
+        "form": BuscarProductoForm,
+    }
+    return render(request, "App/mostrar_productos.html", contexto)
+
+
+
 class ProductoActualizacion(LoginRequiredMixin,UpdateView):
     model = Producto
+    form_class = ProductoForm
     success_url = "/app/mostrar_productos"
     template_name = "App/agregar.html"
-    fields = ["titulo", "precio_venta"]
-
 
 class ProductoEliminar(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Producto
@@ -141,4 +143,13 @@ def about_me(request):
     }
     return render(request, "app/about_me.html", contexto)
 
+class Comentar(LoginRequiredMixin, CreateView):
+    model = Comentarios
+    form_class = ComentarioForm
+    template_name = 'App/comentario.html'
+    success_url = '/app/mostrar_productos'
 
+    def form_valid(self, form):
+        form.instance.usuario = self.request.user
+        form.instance.producto_id = self.kwargs['pk']
+        return super(Comentar, self).form_valid(form)

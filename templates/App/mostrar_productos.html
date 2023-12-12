@@ -2,6 +2,17 @@
 
 {% block cambio %}
 
+    <div>
+
+        <form action="/app/buscar_producto" method="GET">
+
+            {{ form.as_p }}
+
+            <input type="submit" value="Buscar">
+        </form>
+    </div>
+
+
     {% for producto in productos %}
         <h2> {{ producto.titulo }} </h2>
         <p class="lead mb-0">
@@ -11,15 +22,18 @@
         </p>
 
         <a href="/app/producto/{{ producto.id }}">Detalle</a>
-        
+
         <p>
-        <a href="{% url 'ProductoEditar' producto.id %}">Editar</a>
+            <a href="{% url 'ProductoEditar' producto.id %}">Editar</a>
         </p>
-        
-          <p>
-        <a href="{% url 'ProductoEliminar' producto.id %}">Eliminar</a>
+
+        <p>
+            <a href="{% url 'ProductoEliminar' producto.id %}">Eliminar</a>
         </p>
-        
+        <p>
+            <a href="{% url 'comentario' producto.id %}">Comentar</a>
+        </p>
+
     {% endfor %}
 
 
@@ -27,3 +41,4 @@
 
 
 {% endblock %}
+

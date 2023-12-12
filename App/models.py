@@ -26,7 +26,7 @@ class Producto(models.Model):
 
 
 class Comentarios(models.Model):
-    producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
+    producto = models.ForeignKey(Producto, related_name='comentarios', on_delete=models.CASCADE, null=True)
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     comentario = models.CharField(max_length=255)
     fecha_creacion = models.DateTimeField(default=datetime.now)

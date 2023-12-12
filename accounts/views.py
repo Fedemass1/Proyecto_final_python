@@ -53,6 +53,7 @@ def register_request(request):
     }
     return render(request, "accounts/registro.html", contexto)
 
+
 @login_required
 def editar_request(request):
     user = request.user
@@ -72,6 +73,7 @@ def editar_request(request):
     }
 
     return render(request, "accounts/editar_usuario.html", contexto)
+
 
 @login_required
 def editar_avatar_request(request):
@@ -97,6 +99,6 @@ def editar_avatar_request(request):
 
     form = AvatarUpdateForm()
     contexto = {
-      "form": form
+        "form": form
     }
     return render(request, "accounts/avatar.html", contexto)
