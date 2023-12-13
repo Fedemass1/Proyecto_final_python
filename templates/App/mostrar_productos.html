@@ -1,29 +1,69 @@
 {% extends 'base.html' %}
 
 {% block cambio %}
+    <div class="search-container">
+        <form action="/app/buscar_producto" method="GET" class="form-inline">
+            {{ form.titulo }}
+            <button class="btn btn-buscar" type="submit">Buscar</button>
+        </form>
+    </div>
 
-    {% for producto in productos %}
-        <h2> {{ producto.titulo }} </h2>
-        <p class="lead mb-0">
-            ID producto: {{ producto.id_producto }}
-        <p class="lead mb-0">
-            Precio de venta: {{ producto.precio_venta }}
-        </p>
+    <div class="productos-container">
+        {% for producto in productos %}
+            <div class="producto-card">
+                <h2>{{ producto.titulo }}</h2>
+                <p>ID producto: {{ producto.id_producto }}</p>
+                <p>Precio de venta: U$S {{ producto.precio_venta }}</p>
 
-        <a href="/app/producto/{{ producto.id }}">Detalle</a>
-        
-        <p>
-        <a href="{% url 'ProductoEditar' producto.id %}">Editar</a>
-        </p>
-        
-          <p>
-        <a href="{% url 'ProductoEliminar' producto.id %}">Eliminar</a>
-        </p>
-        
-    {% endfor %}
+                <div class="acciones">
+                    <a class="btn btn-contenido" href="/app/producto/{{ producto.id }}">Detalle</a>
+                    <a class="btn btn-contenido" href="{% url 'comentario' producto.id %}">Comentar</a>
+                    <a class="btn btn-contenido" href="{% url 'ProductoEditar' producto.id %}" style="background-color: orange; color: #fff;">Editar</a>
+                    <a class="btn btn-contenido" href="{% url 'ProductoEliminar' producto.id %}" style="background-color: red; color: #fff;">Eliminar</a>
+                </div>
+            </div>
 
+            <hr class="separador">
+        {% endfor %}
+    </div>
 
-    <hr>
+    <style>
+        .btn-contenido,
+        .btn-buscar {
+            padding: 4px 11px;
+            font-size: 14px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            height: 32px; 
+        }
 
+        .btn-contenido {
+            background-color: #007BFF;
+            color: #fff;
+            margin-right: 10px;
+        }
 
+        .btn-buscar {
+            background-color: #6c757d;
+            color: #fff;
+        }
+
+        .btn-contenido:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-buscar:hover {
+            background-color: #495057;
+        }
+
+        .form-inline {
+            display: flex;
+            align-items: center;
+        }
+    </style>
 {% endblock %}
+
+
+

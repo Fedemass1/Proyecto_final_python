@@ -5,7 +5,6 @@ from accounts.views import login_request, CustomLogoutView, register_request, ed
 
 urlpatterns = [
     path('login/', login_request, name='Login'),
-    # path('logout/', LogoutView.as_view(template_name="accounts/logout.html"), name='Logout'),
     path('logout/', CustomLogoutView.as_view(), name='Logout'),
     path('register/', register_request, name='Registro'),
     path('editar/', editar_request, name='Editar'),
