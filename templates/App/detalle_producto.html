@@ -1,33 +1,43 @@
 {% extends 'base.html' %}
 
 {% block cambio %}
-    <h1>Título: {{ producto.titulo }}</h1>
-    <p>Descripción: {{ producto.descripcion }}</p>
-    <p>Fecha creación: {{ producto.fecha_creacion }}</p>
-    <img style="height: 300px" src="{{ producto.imagen.url }}" alt="">
-
-    <br>
-    <div class="container">
-        <h4>Comentarios de los usuarios</h4>
-        <br>
-        <div class="container">
-            {% if not producto.comentarios.all %}
-                No han comentado este instrumento
-            {% else %}
-                {% for comentario in producto.comentarios.all %}
-                    <p>Usuario: {{ comentario.usuario.username }}</p>
-                    <p><strong>{{ comentario.comentario }}</strong></p>
-                    <p><small>{{ comentario.fecha_creacion }}</small></p>
-                    {% if comentario.usuario == request.user or request.user.is_staff %}
-                        <a class="btn btn-danger" href="{% url 'ComentarioEliminar' comentario.id %}">
-                            <i class="fas fa-trash-alt"></i> Eliminar
-                        </a>
-                    {% endif %}
-                    <hr>
-                {% endfor %}
-            {% endif %}
-            <a href="{% url 'comentario' producto.pk %}">Agrega un Comentario</a>
+    <div class="container mt-5" style="margin-left: 20px;">
+        <div class="row">
+            <div class="col-md-8">
+                <h1>{{ producto.titulo }}</h1>
+                <img class="img-fluid mb-4" src="{{ producto.imagen.url }}" alt="{{ producto.titulo }}">
+                <h5>Precio de venta: U$S {{ producto.precio_venta }}</h5>
+                <p>{{ producto.descripcion }}</p>
+                <p>Fecha de creación: {{ producto.fecha_creacion }}</p>
+            </div>
+            <div class="col-md-6" style="margin-left: -300px;">  
+                <h4 class="mb-4">Comentarios de los usuarios</h4>
+                {% if not producto.comentarios.all %}
+                    <p class="mb-4">No hay comentarios para este producto.</p>
+                {% else %}
+                    {% for comentario in producto.comentarios.all %}
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h6 class="card-subtitle mb-2 text-muted">
+                                    Usuario: {{ comentario.usuario.username }}
+                                </h6>
+                                <p class="card-text"><strong>{{ comentario.comentario }}</strong></p>
+                                <p class="card-text">
+                                    <small class="text-muted">{{ comentario.fecha_creacion }}</small>
+                                </p>
+                                {% if comentario.usuario == request.user or request.user.is_staff %}
+                                    <a class="btn btn-danger btn-sm" href="{% url 'ComentarioEliminar' comentario.id %}">
+                                        <i class="fas fa-trash-alt"></i> Eliminar
+                                    </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                <a class="btn btn-primary btn-sm" href="{% url 'comentario' producto.pk %}">
+                    Agregar un Comentario
+                </a>
+            </div>
         </div>
     </div>
-
 {% endblock %}
