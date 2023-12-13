@@ -14,6 +14,7 @@ def show_html(request):
     }
     return render(request, 'index.html', contexto)
 
+
 @login_required
 def mostrar_clientes(request):
     clientes = Cliente.objects.all()
@@ -23,6 +24,7 @@ def mostrar_clientes(request):
     }
 
     return render(request, "App/mostrar_clientes.html", contexto)
+
 
 @login_required
 def agregar_cliente_form(request):
@@ -62,6 +64,7 @@ def mostrar_productos(request):
         "form": BuscarProductoForm,
     }
     return render(request, "App/mostrar_productos.html", contexto)
+
 
 class DetalleProducto(LoginRequiredMixin,DetailView):
     model = Producto
@@ -121,12 +124,19 @@ def buscar_producto(request):
     return render(request, "App/mostrar_productos.html", contexto)
 
 
-
-class ProductoActualizacion(LoginRequiredMixin,UpdateView):
+class ProductoActualizacion(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Producto
     form_class = ProductoForm
     success_url = "/app/mostrar_productos"
     template_name = "App/agregar.html"
+
+    def test_func(self):
+        return self.request.user.is_staff
+
+    def handle_no_permission(self):
+        message = "Solo los administradores pueden realizar esta acción."
+        return render(self.request, 'App/acceso_denegado.html', {'message': message})
+
 
 class ProductoEliminar(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Producto
@@ -136,12 +146,17 @@ class ProductoEliminar(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def test_func(self):
         return self.request.user.is_staff
 
+    def handle_no_permission(self):
+        message = "Solo los administradores pueden realizar esta acción."
+        return render(self.request, 'App/acceso_denegado.html', {'message': message})
+
 
 def about_me(request):
     contexto = {
 
     }
     return render(request, "app/about_me.html", contexto)
+
 
 class Comentar(LoginRequiredMixin, CreateView):
     model = Comentarios
@@ -153,3 +168,13 @@ class Comentar(LoginRequiredMixin, CreateView):
         form.instance.usuario = self.request.user
         form.instance.producto_id = self.kwargs['pk']
         return super(Comentar, self).form_valid(form)
+
+
+class ComentarioEliminar(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Comentarios
+    template_name = "App/eliminar_comentario.html"
+    success_url = "/app/mostrar_productos"
+
+    def test_func(self):
+        comentario = self.get_object()
+        return self.request.user == comentario.usuario or self.request.user.is_staff

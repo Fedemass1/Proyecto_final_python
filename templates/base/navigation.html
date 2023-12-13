@@ -6,19 +6,44 @@
         <a class="navbar-brand" href="/app/mostrar_productos">Productos</a>
         <a class="navbar-brand" href="/app/ventas">Agregar venta</a>
         <a class="navbar-brand" href="/app/mostrar_ventas">Ventas</a>
-        <a class="navbar-brand" href="/app/about_me">Acerca de mi</a>
+        <a class="navbar-brand" href="/app/about_me">Acerca de mí</a>
+        
         {% if user.is_authenticated %}
-            <a href="{% url 'Editar' %}">
-                <h5> {{ user.get_username }} </h5>
-            
-            <a href="{% url 'Editar_avatar' %}">
-            <img style="height: 60px" src="{{ user.avatar.imagen.url }}" alt="">
-            </a>
-            </a>
-            <a class="btn btn-primary" href="{% url 'Logout' %}">Logout</a>
+            <div class="user-info">
+                <a href="{% url 'Editar' %}" class="username">
+                    <span style="color: #f8d615;">{{ user.get_username }}</span>
+                </a>
+                <a href="{% url 'Editar_avatar' %}">
+                    <img style="height: 60px" src="{{ user.avatar.imagen.url }}" alt="">
+                </a>
+                <a class="btn btn-primary" href="{% url 'Logout' %}">Logout</a>
+            </div>
         {% else %}
             <a class="btn btn-primary" href="{% url 'Login' %}">Login</a>
         {% endif %}
+        
         <a class="btn btn-secondary" href="{% url 'Registro' %}">Sign up</a>
     </div>
 </nav>
+
+<style>
+    .user-info {
+        display: flex;
+        align-items: center;
+    }
+
+    .username {
+        margin-right: 15px;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+    .username span {
+        padding: 12px;
+        border-radius: 15px;
+        background-color: #343a40;
+        color: #f8d615; 
+        display: inline-block;
+    }
+</style>

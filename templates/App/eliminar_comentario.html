@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block cambio %}
+
+    <form action="" method="POST">
+
+        {% csrf_token %}
+
+        Estas por eliminar el comentario {{ object }}, estás seguro?
+
+        <input type="submit" value="Eliminar">
+
+    </form>
+
+{% endblock %}
