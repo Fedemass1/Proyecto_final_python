@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
@@ -20,10 +21,13 @@ def login_request(request):
 
             if user is not None:
                 login(request, user)
+                return redirect("/app/mostrar_productos")
+        else:
+            messages.error(request, 'Nombre de usuario o contraseña incorrectos.')
 
-        return redirect("/app/mostrar_productos")
+    else:
+        form = AuthenticationForm()
 
-    form = AuthenticationForm()
     contexto = {
         'form': form
     }
@@ -36,7 +40,7 @@ class CustomLogoutView(View):
         contexto = {
 
         }
-
+        messages.success(request, '¡Has cerrado sesión con éxito!')
         return render(request, 'accounts/logout.html', contexto)
 
 

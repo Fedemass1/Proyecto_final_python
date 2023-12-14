@@ -4,6 +4,7 @@ from django.urls import path
 from accounts.views import login_request, CustomLogoutView, register_request, editar_request, editar_avatar_request
 
 urlpatterns = [
+    path('', login_request, name='Login'),
     path('login/', login_request, name='Login'),
     path('logout/', CustomLogoutView.as_view(), name='Logout'),
     path('register/', register_request, name='Registro'),

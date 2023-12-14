@@ -3,6 +3,7 @@ from App.views import (show_html, agregar_cliente_form, mostrar_clientes,
                        AgregarProducto, mostrar_productos, agregar_venta_form,
                        mostrar_ventas, buscar_cliente, DetalleProducto, ProductoActualizacion, about_me,
                        ProductoEliminar, Comentar, buscar_producto, ComentarioEliminar)
+from accounts.views import login_request
 
 urlpatterns = [
     path('show/', show_html),
