@@ -67,4 +67,4 @@ Para poder operar en la web es necesario estar registrado y logueado.
 
 Se han realizado un total de 15 pruebas, todas ellas exitosas, en cuanto al funcionamiento de la página web. El
 detalle de los test realizados se encuentra dentro del proyecto en un archivo de excel titulado
-"Pruebas Proyecto Final Python CoderHouse"
+"Pruebas Proyecto Final Python CoderHouse".
