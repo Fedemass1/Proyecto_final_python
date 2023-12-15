@@ -20,6 +20,7 @@ Para poder acceder a la web se debe crear en primer lugar un entorno virtual y l
 en la terminal:
 
 pip install django
+
 pip install pillow
 
 La base de datos ya está incluida en el proyecto.
