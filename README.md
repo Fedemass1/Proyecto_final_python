@@ -14,7 +14,7 @@ Usuario: admin
 Password: admin
 
 
-##Nombre del Proyecto
+#Nombre del Proyecto#
 Portal de gestión de productos, ventas y clientes
 
 ##Alcance del proyecto
