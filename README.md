@@ -8,6 +8,10 @@ Link video explicativo del proyecto final en YouTube: https://youtu.be/kZCHvn-lV
 
 Acceso a la web: http://localhost:8000/
 
+IMPORTANTE: Acceder con el siguiente usuario para tener privilegios de administrador y tener la funcionalidad
+completa.
+Usuario: admin
+Password: admin
 
 
 ##Nombre del Proyecto
@@ -42,6 +46,7 @@ a cualquier usuario) El acceso a la consola de administrador, este tipo de usuar
 su perfil, junto a las opciones de edición de este.
 
 Para poder operar en la web es necesario estar registrado y logueado.
+
 Se han realizado un total de 15 pruebas, todas ellas exitosas, en cuanto al funcionamiento de la página web. El
 detalle de los test realizados se encuentra dentro del proyecto en un archivo de excel titulado
 "Pruebas Proyecto Final Python CoderHouse"
