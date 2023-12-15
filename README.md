@@ -14,9 +14,11 @@ Usuario: admin
 Password: admin
 
 
+
 NOMBRE DEL PROYECTO
 
 Portal de gestión de productos, ventas y clientes
+
 
 
 ALCANCE DEL PROYECTO
@@ -24,6 +26,7 @@ ALCANCE DEL PROYECTO
 El proyecto está dirigido a todas aquellas personas que estén interesadas en administrar su negocio de manera más
 eficiente. Este les permitirá gestionar clientes, ventas y productos. A su vez, podrán tener un feedback constante con
 el consumidor, ya que estos tienen la posibilidad de comentar las publicaciones sobre productos.
+
 
 
 ESTRUCTURA DEL PROYECTO
