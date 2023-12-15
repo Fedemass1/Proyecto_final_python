@@ -23,6 +23,8 @@ pip install django
 
 pip install pillow
 
+python manage.py runserver
+
 La base de datos ya está incluida en el proyecto.
 
 -----------------------------------------------------------------------------------------------------------------------
