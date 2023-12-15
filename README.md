@@ -14,15 +14,20 @@ Usuario: admin
 Password: admin
 
 
-#Nombre del Proyecto#
+NOMBRE DEL PROYECTO
+
 Portal de gestión de productos, ventas y clientes
 
-##Alcance del proyecto
+
+ALCANCE DEL PROYECTO
+
 El proyecto está dirigido a todas aquellas personas que estén interesadas en administrar su negocio de manera más
 eficiente. Este les permitirá gestionar clientes, ventas y productos. A su vez, podrán tener un feedback constante con
 el consumidor, ya que estos tienen la posibilidad de comentar las publicaciones sobre productos.
 
-##Estructura del proyecto
+
+ESTRUCTURA DEL PROYECTO
+
 El proyecto tiene dos enfoques distintos, acorde a los permisos del usuario que acceda. Por un lado, los usuarios
 con estatus de staff, tendrán acceso al CRUD completo y a las opciones de gestión del negocio. Estos pueden:
 -Agregar y consultar clientes
