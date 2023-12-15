@@ -8,28 +8,26 @@ Link video explicativo del proyecto final en YouTube: https://youtu.be/kZCHvn-lV
 
 Acceso a la web: http://localhost:8000/
 
-IMPORTANTE: Acceder con el siguiente usuario para tener privilegios de administrador y tener la funcionalidad
+**IMPORTANTE:** Acceder con el siguiente usuario para tener privilegios de administrador y tener la funcionalidad
 completa.
 Usuario: admin
 Password: admin
 
+-----------------------------------------------------------------------------------------------------------------------
 
-
-NOMBRE DEL PROYECTO
+**NOMBRE DEL PROYECTO**
 
 Portal de gestión de productos, ventas y clientes
 
 
-
-ALCANCE DEL PROYECTO
+**ALCANCE DEL PROYECTO**
 
 El proyecto está dirigido a todas aquellas personas que estén interesadas en administrar su negocio de manera más
 eficiente. Este les permitirá gestionar clientes, ventas y productos. A su vez, podrán tener un feedback constante con
 el consumidor, ya que estos tienen la posibilidad de comentar las publicaciones sobre productos.
 
 
-
-ESTRUCTURA DEL PROYECTO
+**ESTRUCTURA DEL PROYECTO**
 
 El proyecto tiene dos enfoques distintos, acorde a los permisos del usuario que acceda. Por un lado, los usuarios
 con estatus de staff, tendrán acceso al CRUD completo y a las opciones de gestión del negocio. Estos pueden:
