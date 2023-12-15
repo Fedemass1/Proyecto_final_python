@@ -1,7 +1,10 @@
 # PROYECTO FINAL CODER HOUSE PYTHON
 COMISIÓN: 47785
+
 Alumno: Federico Ezequiel Massone
+
 DNI: 35.674.907
+
 Autor del proyecto: Federico Ezequiel Massone
 
 Link video explicativo del proyecto final en YouTube: https://youtu.be/kZCHvn-lVws
