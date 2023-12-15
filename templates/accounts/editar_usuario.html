@@ -1,12 +1,42 @@
 {% extends 'base.html' %}
 
 {% block cambio %}
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <form action="" method="POST" class="mb-4">
+                            {% csrf_token %}
+                            <h2 class="text-center mb-4">Editar Datos</h2>
+                            {{ form.as_p }}
+                            <button type="submit" class="btn btn-primary btn-block">Guardar Cambios</button>
+                        </form>
 
-    <form action="" method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Editar datos">
-    </form>
-    
-    
+                        {% if user.is_staff %}
+                            <hr class="my-4">
+                            <div class="text-center">
+                                <a href="{% url 'admin:index' %}" class="btn btn-success btn-block btn-hover-reverse" target="_blank" >Consola Admin</a>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .btn-hover-reverse {
+            transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+            background-color: #28a745;
+            color: #fff;
+            border: 1px solid #28a745;
+        }
+
+        .btn-hover-reverse:hover {
+            background-color: #fff;
+            color: #28a745;
+            box-shadow: 0 0 10px rgba(40, 167, 69, 0.5);
+        }
+    </style>
 {% endblock %}

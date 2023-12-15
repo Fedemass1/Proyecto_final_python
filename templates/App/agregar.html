@@ -1,18 +1,50 @@
-{%  extends 'base.html'  %}
+{% extends 'base.html' %}
 
 {% block cambio %}
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card position-relative">
+                    <div class="card-body">
+                        <h2 class="text-center mb-3">Agregar Nuevo</h2>
 
-    <form action="" method="POST" enctype="multipart/form-data">
+                        {% if messages %}
+                            <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11;">
+                                <div class="alert alert-success alert-dismissible fade show" role="alert" style="max-width: 300px;">
+                                    <div class="d-flex align-items-center">
+                                        <div class="flex-grow-1">
+                                            {% for message in messages %}
+                                                {{ message }}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
 
-        {% csrf_token %}
+                        <form action="" method="POST" enctype="multipart/form-data" style="max-width: 100%;">
+                            {% csrf_token %}
+                            <div class="form-group mb-4">
+                                {{ form.as_p }}
+                            </div>
+                            <input type="submit" value="Agregar" class="btn btn-success btn-block">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        {{ form.as_p }}
-
-    <input type="submit" value="Agregar">
-
-</form>
-
+    <script>
+        // Script para cerrar automáticamente el mensaje con fade out
+        setTimeout(function() {
+            var alert = document.querySelector('.alert');
+            if (alert) {
+                alert.style.opacity = '0';
+                setTimeout(function() {
+                    alert.style.display = 'none';
+                }, 600);  
+            }
+        }, 3000);  
+    </script>
 {% endblock %}
-
-
-

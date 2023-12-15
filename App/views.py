@@ -1,6 +1,9 @@
-from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
+from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
 
 from App.models import Cliente, Producto, Venta, Comentarios
@@ -15,7 +18,11 @@ def show_html(request):
     return render(request, 'index.html', contexto)
 
 
-@login_required
+def es_staff(user):
+    return user.is_staff
+
+
+@user_passes_test(es_staff)
 def mostrar_clientes(request):
     clientes = Cliente.objects.all()
     contexto = {
@@ -26,7 +33,7 @@ def mostrar_clientes(request):
     return render(request, "App/mostrar_clientes.html", contexto)
 
 
-@login_required
+@user_passes_test(es_staff)
 def agregar_cliente_form(request):
     cliente = ClienteForm
     contexto = {
@@ -48,12 +55,17 @@ def agregar_cliente_form(request):
     return render(request, "App/agregar.html", contexto)
 
 
-class AgregarProducto(LoginRequiredMixin,CreateView):
+@method_decorator(user_passes_test(es_staff), name='dispatch')
+class AgregarProducto(LoginRequiredMixin, CreateView):
     template_name = "App/agregar.html"
     model = Producto
     form_class = ProductoForm
-    success_url = "/app/productos"
+    success_url = reverse_lazy("mostrar_productos")
 
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        messages.success(self.request, 'Producto agregado exitosamente.')
+        return response
 
 
 @login_required
@@ -71,7 +83,7 @@ class DetalleProducto(LoginRequiredMixin,DetailView):
     template_name = "App/detalle_producto.html"
 
 
-@login_required
+@user_passes_test(es_staff)
 def agregar_venta_form(request):
     venta = VentaForm
     contexto = {
@@ -92,7 +104,8 @@ def agregar_venta_form(request):
 
     return render(request, "App/agregar.html", contexto)
 
-@login_required
+
+@user_passes_test(es_staff)
 def mostrar_ventas(request):
     ventas = Venta.objects.all()
     contexto = {
@@ -102,6 +115,7 @@ def mostrar_ventas(request):
     return render(request, "App/mostrar_ventas.html", contexto)
 
 
+@user_passes_test(es_staff)
 def buscar_cliente(request):
     dni = request.GET["dni"]
     clientes = Cliente.objects.filter(dni__icontains=dni)

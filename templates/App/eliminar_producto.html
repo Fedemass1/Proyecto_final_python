@@ -1,15 +1,23 @@
 {% extends 'base.html' %}
 
 {% block cambio %}
-
-    <form action="" method="POST">
-
-        {% csrf_token %}
-
-        Estas por eliminar el producto {{ object }}, estás seguro?
-
-        <input type="submit" value="Eliminar">
-
-    </form>
-
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="text-center mb-4">Confirmar Eliminación</h2>
+                        
+                        <form action="" method="POST">
+                            {% csrf_token %}
+                            <p class="lead">Estás por eliminar el producto {{ object.titulo }}, ¿estás seguro?</p>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-danger">Eliminar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

@@ -9,7 +9,7 @@ urlpatterns = [
     path('show/', show_html),
     path('clientes/', agregar_cliente_form),
     path('mostrar_clientes/', mostrar_clientes),
-    path('productos/', AgregarProducto.as_view(), name=''),
+    path('productos/', AgregarProducto.as_view(), name='mostrar_productos'),
     path('mostrar_productos/', mostrar_productos),
     path('ventas/', agregar_venta_form),
     path('mostrar_ventas/', mostrar_ventas),

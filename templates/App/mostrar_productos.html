@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
 
 {% block cambio %}
-    <div class="search-container">
+    <div class="search-container mb-3">
         <form action="/app/buscar_producto" method="GET" class="form-inline">
             {{ form.titulo }}
             <button class="btn btn-buscar" type="submit">Buscar</button>
+          
         </form>
     </div>
 
@@ -36,7 +37,7 @@
             text-decoration: none;
             border-radius: 5px;
             transition: background-color 0.3s ease;
-            height: 32px; 
+            height: 32px;
         }
 
         .btn-contenido {
